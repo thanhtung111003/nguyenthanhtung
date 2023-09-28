@@ -2,6 +2,8 @@
 @section('content')
 <!--features_items-->
                     <div class="features_items">
+					<div class="fb-like" data-href="{{$url_canonical}}" 
+					data-width="" data-layout="" data-action="" data-size="" data-share="true"></div>
 					@foreach($category_name as $key => $name)
 						<h2 class="title text-center">{{$name->category_name}}</h2>
 					@endforeach
@@ -30,5 +32,9 @@
 						@endforeach
 
 					</div>
+					<div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100019482313308" 
+					data-tabs="message" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+					<blockquote cite="https://www.facebook.com/profile.php?id=100019482313308" class="fb-xfbml-parse-ignore">
+					<a href="https://www.facebook.com/profile.php?id=100019482313308">Nguyễn Thanh Tùng</a></blockquote></div>
 <!--features_items--> 
 @endsection

@@ -10,7 +10,14 @@ use Illuminate\Support\Facades\Redirect; //thành công hoặc thất bại thì
 session_start();
 class HomeController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        //Seo
+        $meta_desc = "Chuyên bán điện thoại, laptop, tivi, phụ kiện chính hãng";
+        $meta_keywords = "dien thoai, điện thoại, laptop, phu kien chinh hang, phụ kiện chính hãng";
+        $meta_title = "T-Shop Điện thoại, laptop, phụ kiện chính hãng";
+        $url_canonical = $request->url();
+        //--Seo
+
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
         // $all_product = DB::table('tbl_product')
@@ -19,9 +26,22 @@ class HomeController extends Controller
         // ->orderBy('tbl_product.product_id', 'desc')->get();
         $all_product = DB::table('tbl_product')->where('product_status', '0')->orderBy('product_id', 'desc')->limit(4)->get();
 
-        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product);
+        return view('pages.home')->with('category', $cate_product)
+                                 ->with('brand', $brand_product)
+                                 ->with('all_product', $all_product)
+                                 ->with('meta_desc', $meta_desc)
+                                 ->with('meta_keywords', $meta_keywords)
+                                 ->with('meta_title', $meta_title)
+                                 ->with('url_canonical', $url_canonical);
     }
     public function search(Request $request){
+        //Seo
+        $meta_desc = "Tìm kiếm sản phẩm";
+        $meta_keywords = "Tìm kiếm sản phẩm";
+        $meta_title = "Tìm kiếm sản phẩm";
+        $url_canonical = $request->url();
+        //--Seo
+
         $keywords=$request->keywords_submit;
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
@@ -31,7 +51,13 @@ class HomeController extends Controller
         // ->orderBy('tbl_product.product_id', 'desc')->get();
         $search_product = DB::table('tbl_product')->where('product_name', 'like', '%'.$keywords.'%')->get();
 
-        return view('pages.sanpham.search')->with('category', $cate_product)->with('brand', $brand_product)->with('search_product', $search_product);
+        return view('pages.sanpham.search')->with('category', $cate_product)
+                                           ->with('brand', $brand_product)
+                                           ->with('search_product', $search_product)
+                                           ->with('meta_desc', $meta_desc)
+                                           ->with('meta_keywords', $meta_keywords)
+                                           ->with('meta_title', $meta_title)
+                                           ->with('url_canonical', $url_canonical);
 
     }
 }

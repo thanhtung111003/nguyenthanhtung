@@ -76,8 +76,13 @@ Route::get('/login-checkout', 'App\Http\Controllers\CheckoutController@login_che
 Route::get('/logout-checkout', 'App\Http\Controllers\CheckoutController@logout_checkout');
 Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@add_customer');
 Route::post('/login-customer', 'App\Http\Controllers\CheckoutController@login_customer');
+Route::post('/order-place', 'App\Http\Controllers\CheckoutController@order_place');
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@checkout');
 Route::get('/payment', 'App\Http\Controllers\CheckoutController@payment');
 Route::post('/save-checkout-customer', 'App\Http\Controllers\CheckoutController@save_checkout_customer');
+
+/*Order*/
+Route::get('/manage-order', 'App\Http\Controllers\CheckoutController@manage_order');
+Route::get('/view-order/{orderId}', 'App\Http\Controllers\CheckoutController@view_order');
 
 

@@ -2,11 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Home | E-Shopper</title>
-    <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<!----------------Seo-------------->
+    <meta name="description" content="{{$meta_desc}}"/>
+	<meta name="keywords" content="{{$meta_keywords}}"/>
+	<meta name="robots" content="INDEX,FOLLOW"/>
+	<link rel="canonical" href="{{$url_canonical}}"/>
+    <meta name="author" content=""/>
+	<link rel="icon" type="image/x-icon" href=""/>
+
+	<!-- <meta property="og:site_name" content="http://localhost/cdtt_nguyenthanhtung/"/>
+	<meta property="og:description" content="{{$meta_desc}}"/>
+	<meta property="og:title" content="{{$meta_title}}"/>
+	<meta property="og:url" content="{{$url_canonical}}"/>
+	<meta property="og:type" content="website"/> -->
+    <!----------------Seo-------------->
+
+	<title>{{$meta_title}}</title>
+	<link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/price-range.css')}}" rel="stylesheet">
@@ -25,10 +38,6 @@
 </head><!--/head-->
 
 <body>
-	<?php
-	echo Session::get('customer_id');
-	echo Session::get('shipping_id');
-	?>
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -94,7 +103,7 @@
 								<?php
 									$customer_id = Session::get('customer_id');
 									$shipping_id = Session::get('shipping_id');
-									if($customer_id!=NULL && $shipping_id!=NULL) {
+									if($customer_id!=NULL && $shipping_id==NULL) {
 								?>
 									<li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
 								<?php			
@@ -444,13 +453,17 @@
 		
 	</footer><!--/Footer-->
 	
-
-  
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 	<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>
 	<script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+
+	<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" 
+src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" 
+nonce="sohHGD3t"></script>
+
 </body>
 </html>

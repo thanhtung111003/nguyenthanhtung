@@ -19,12 +19,13 @@ class ProductController extends Controller
             return Redirect::to('admin')->send();
         }
     }
-public function add_product(){
+    public function add_product(){
         $this->AuthLogin();
         $cate_product = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->orderBy('brand_id', 'desc')->get();
 
-        return view('admin.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
+        return view('admin.add_product')->with('cate_product', $cate_product)
+                                        ->with('brand_product', $brand_product);
     }
     public function all_product(){
         $this->AuthLogin();
@@ -81,8 +82,9 @@ public function add_product(){
         $brand_product = DB::table('tbl_brand')->orderBy('brand_id', 'desc')->get();
 
         $edit_product = DB::table('tbl_product')->where('product_id',$product_id)->get();
-        $manager_product = view('admin.edit_product')->with('edit_product', $edit_product)->with('cate_product', $cate_product)
-                                                                                          ->with('brand_product', $brand_product);
+        $manager_product = view('admin.edit_product')->with('edit_product', $edit_product)
+                                                     ->with('cate_product', $cate_product)
+                                                     ->with('brand_product', $brand_product);
         return view('admin_layout')->with('admin.edit_product', $manager_product);
     }
     public function update_product(Request $request, $product_id){
@@ -119,7 +121,7 @@ public function add_product(){
 
     }
     //End Admin Page
-    public function details_product($product_id){
+    public function details_product($product_id, Request $request){
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
         $details_product = DB::table('tbl_product')
@@ -129,6 +131,12 @@ public function add_product(){
 
         foreach($details_product as $key => $value){
             $category_id = $value->category_id;
+            //Seo
+            $meta_desc = $value->product_desc;
+            $meta_keywords = $value->product_content;
+            $meta_title = $value->product_name;
+            $url_canonical = $request->url();
+            //--Seo
         }
         $related_product = DB::table('tbl_product')
         ->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl_product.category_id')
@@ -138,6 +146,11 @@ public function add_product(){
         return view ('pages.sanpham.show_details')->with('category', $cate_product)
                                                   ->with('brand', $brand_product)
                                                   ->with('product_details', $details_product)
-                                                  ->with('relate', $related_product);
+                                                  ->with('relate', $related_product)
+                                                  ->with('meta_desc', $meta_desc)
+                                                  ->with('meta_keywords', $meta_keywords)
+                                                  ->with('meta_title', $meta_title)
+                                                  ->with('url_canonical', $url_canonical);
+
     }
 }
