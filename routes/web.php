@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 /*Frontend*/
 Route::get('/','App\Http\Controllers\HomeController@index');
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
@@ -40,6 +44,11 @@ Route::get('/active-category-product/{category_product_id}', 'App\Http\Controlle
 
 Route::post('/save-category-product', 'App\Http\Controllers\CategoryProduct@save_category_product');
 Route::post('/update-category-product/{category_product_id}', 'App\Http\Controllers\CategoryProduct@update_category_product');
+
+/*Send mail*/
+Route::get('/send-mail', 'App\Http\Controllers\HomeController@send_mail');
+
+
 
 /*Brand Product*/
 Route::get('/add-brand-product', 'App\Http\Controllers\BrandProduct@add_brand_product');

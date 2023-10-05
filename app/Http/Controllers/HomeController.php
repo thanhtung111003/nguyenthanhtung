@@ -4,12 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Mail;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect; //thành công hoặc thất bại thì trả về trang gì đó
 session_start();
 class HomeController extends Controller
 {
+    public function send_mail() {
+        //send mail
+        $to_name = "Thanh Tung";
+        $to_email = "thanhtungnguyen02113@gmail.com"; //send to this mail
+
+        $data = array("name" => "Mail từ tài khoản khách hàng", "body" => 'Mail gửi về vấn đề hàng hóa'); //body of mail.blade.php
+
+        Mail::send('pages.send_mail', $data, function($message) use ($to_name, $to_email){
+            $message->to($to_email)->subject('Test thử gửi mail google'); //send this mail with subject
+            $message->from($to_email, $to_name); //send from this mail
+        });
+        //return Redirect('/')->with('message', '');
+        //--send mail
+    }
     public function index(Request $request) {
         //Seo
         $meta_desc = "Chuyên bán điện thoại, laptop, tivi, phụ kiện chính hãng";
